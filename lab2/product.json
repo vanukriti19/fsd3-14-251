@@ -4,5 +4,11 @@
     "name": "HP Laptop",
     "price": 47000,
     "qty": 3
+  },
+  {
+    "id": 105,
+    "name": "\"mobile\"",
+    "price": 30000,
+    "qty": 2
   }
 ]

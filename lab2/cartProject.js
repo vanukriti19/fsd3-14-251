@@ -35,6 +35,29 @@ const displayCart = async () => {
   console.log(`Total payble amount Rs. ${total}`);
 };
 
+const removeProduct = async (pid)=>{
+  const cart = await getCart();
+  //const isFoundInCart = cart.find((item) => item.id === pid);
+  const newProuctList = cart.filter((item) => item.id !== pid);
+  await saveCart(newProuctList);
+  console.log("Product removed from cart");
+
+}
+
+const updateQuantity = async (pid, option="-")=>{
+  const cart = await getCart();
+  const isFoundInCart = cart.find((item) => item.id === pid);
+  if(isFoundInCart){
+    isFoundInCart.qty -= 1;
+    await saveCart(cart);
+    console.log(`${isFoundInCart.name} quantity updated`);
+  }
+  else {
+    console.log(`Product with id ${pid} not found in cart`);
+  }
+}
+
+
 const main = async () => {
   let choice;
   const cin = readline.createInterface({ input: stdin, output: stdout });
@@ -65,9 +88,11 @@ const main = async () => {
         break;
 
       case 3:
-        console.log("remove product");
+        const pid = await cin.question("Enter product id to remove: ");
+        await removeProduct(Number(pid));
         break;
       case 4:
+        let pid=
         console.log("update quantity");
         break;
       case 5:
